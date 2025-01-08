@@ -1,6 +1,6 @@
 # Rock Paper Scissors Lizard Rock
 
-## The rules for Rock Paper Scissors Lizard Spock are:
+### The rules for Rock Paper Scissors Lizard Spock are:
 
 - Scissors: Cuts paper and decapitates lizard
 
