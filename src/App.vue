@@ -66,18 +66,18 @@ export default {
 <template>
   <img class="logo center" src="/src/assets/rpsls.webp" alt="rock paper scissors lizard spock image">
 
-  <div class="in-game-buttons-container">
+  <div id="logic-buttons-container">
     <button v-if="gameState == gameStateOptions.START" aria-label="play game" @click="startGame" class="center">Play
       game</button>
-    <button v-else-if="gamestate == gameStateOptions.PLAYING" aria-label="end game" @click="endGame" class="center">End
+    <button v-else-if="gameState == gameStateOptions.PLAYING" aria-label="end game" @click="endGame" class="center">End
       game</button>
-    <button v-else="gamestate == gameStateOptions.GAME_OVER" aria-label="play again" @click="startGame"
+    <button v-else="gameState == gameStateOptions.GAME_OVER" aria-label="play again" @click="startGame"
       class="center">Play
       Again?</button>
   </div>
 
 
-  <div v-if="gameState == gameStateOptions.PLAYING" id="game-btns-container">
+  <div v-if="gameState == gameStateOptions.PLAYING" id="game-buttons-container">
     <button v-for="choice in choiceOptions" aria-label="{{choice}} button" @click="setPlayerChoice(choice)">{{ choice
       }}</button>
   </div>
@@ -106,15 +106,20 @@ export default {
   /* margin-top: 0%; maybe change this from 20 - 0& after the game starts??? */
 }
 
-.in-game-buttons-container>button {
+#logic-buttons-container {
   margin-top: 1em;
 }
 
-#game-btns-container {
+#game-buttons-container {
   display: flex;
   flex-direction: row;
   margin-top: 1em;
   justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#game-buttons-container>button {
+  margin-top: 1em;
 }
 
 .score-text {
@@ -141,7 +146,6 @@ button {
 }
 
 button:hover {
-  /* background-color: #12a2d0; */
   background-color: #17133b;
   border: 2px solid #12a2d0;
   transition: 0.2s;
