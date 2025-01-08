@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     setGameState: function (state) {
-      console.log(state);
       this.gameState = state;
     },
     startGame: function () {
