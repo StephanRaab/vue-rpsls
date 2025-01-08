@@ -67,17 +67,19 @@ export default {
   <img class="logo center" src="/src/assets/rpsls.webp" alt="rock paper scissors lizard spock image">
 
   <div class="in-game-buttons-container">
-    <button v-if="gameState == gameStateOptions.START" @click="startGame" class="center">Play
+    <button v-if="gameState == gameStateOptions.START" aria-label="play game" @click="startGame" class="center">Play
       game</button>
-    <button v-else-if="gamestate == gameStateOptions.PLAYING" @click="endGame" class="center">End
+    <button v-else-if="gamestate == gameStateOptions.PLAYING" aria-label="end game" @click="endGame" class="center">End
       game</button>
-    <button v-else="gamestate == gameStateOptions.GAME_OVER" @click="startGame" class="center">Play
+    <button v-else="gamestate == gameStateOptions.GAME_OVER" aria-label="play again" @click="startGame"
+      class="center">Play
       Again?</button>
   </div>
 
 
   <div v-if="gameState == gameStateOptions.PLAYING" id="game-btns-container">
-    <button v-for="choice in choiceOptions" @click="setPlayerChoice(choice)">{{ choice }}</button>
+    <button v-for="choice in choiceOptions" aria-label="{{choice}} button" @click="setPlayerChoice(choice)">{{ choice
+      }}</button>
   </div>
 
   <div class="score-container">
