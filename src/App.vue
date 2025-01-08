@@ -1,10 +1,23 @@
 <script>
 export default {
   data() {
-
+    return {
+      playerScore: 0,
+      computerScore: 0,
+      choiceOptions: ['rock', 'paper', 'scissors', 'lizard', 'spock'],
+      playerChoice: '',
+      computerChoice: ''
+    }
   },
   methods: {
-
+    setPlayerChoice: function (selection) {
+      this.playerChoice = selection;
+      this.generateComputerChoice();
+    },
+    generateComputerChoice: function () {
+      let computerIndex = Math.floor(Math.random() * this.choiceOptions.length);
+      this.computerChoice = this.choiceOptions[computerIndex];
+    }
   }
 }
 </script>
@@ -12,7 +25,15 @@ export default {
 <template>
   <img class="logo center" src="/src/assets/rpsls.webp" alt="rock paper scissors lizard spock image">
 
-  <button id="start_game" class="center">Play game</button>
+  <button id="start-game" class="center">Play game</button>
+
+
+  <div id="game-btns-container">
+    <button v-for="choice in choiceOptions" @click="setPlayerChoice(choice)">{{ choice }}</button>
+  </div>
+
+  <p class="score">Your Score: {{ playerChoice }}</p>
+  <p class="score">Computer Score: {{ computerChoice }}</p>
 </template>
 
 <style scoped>
@@ -26,28 +47,40 @@ export default {
   /* margin-top: 0%; maybe change this from 20 - 0& after the game starts??? */
 }
 
-#start_game {
+#start-game {
   margin-top: 1em;
+}
+
+#game-btns-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+  justify-content: space-around;
+}
+
+.score {
+  color: white;
+  font-size: 2em;
 }
 
 button {
   padding: 1.2em;
   border-radius: 1em;
-  border: none;
+  border: 2px solid transparent;
   background-color: #5fc5ba;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1em;
   letter-spacing: .2em;
   cursor: pointer;
-  transition: 0.15s;
+  transition: 0.2s;
 }
 
 button:hover {
   /* background-color: #12a2d0; */
   background-color: #17133b;
   border: 2px solid #12a2d0;
-  transition: 0.15s;
+  transition: 0.2s;
   color: white;
 }
 </style>
