@@ -76,7 +76,7 @@ export default {
   </div>
 
 
-  <div id="game-btns-container">
+  <div v-if="gameState == gameStateOptions.PLAYING" id="game-btns-container">
     <button v-for="choice in choiceOptions" @click="setPlayerChoice(choice)">{{ choice }}</button>
   </div>
 
