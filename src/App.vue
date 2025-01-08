@@ -14,10 +14,33 @@ export default {
         lizard: ['paper', 'spock'],
         spock: ['rock', 'scissors']
       },
-      gameInfo: ''
+      gameInfo: '',
+      gameState: 'start',
+      gameStateOptions: {
+        START: 'start',
+        PLAYING: 'playing',
+        GAME_OVER: 'game over'
+      }
     }
   },
   methods: {
+    setGameState: function (state) {
+      console.log(state);
+      this.gameState = state;
+    },
+    startGame: function () {
+      this.setGameState(this.gameStateOptions.PLAYING);
+      this.resetGame();
+    },
+    endGame: function () {
+      this.setGameState(this.gameStateOptions.GAME_OVER);
+    },
+    resetGame: function () {
+      this.playerScore = 0;
+      this.computerScore = 0;
+      this.playerChoice = '',
+        this.computerChoice = ''
+    },
     setPlayerChoice: function (selection) {
       this.playerChoice = selection;
       this.generateComputerChoice();
@@ -43,15 +66,31 @@ export default {
 <template>
   <img class="logo center" src="/src/assets/rpsls.webp" alt="rock paper scissors lizard spock image">
 
-  <button id="start-game" class="center">Play game</button>
+  <div class="in-game-buttons-container">
+    <button v-if="gameState == gameStateOptions.START" @click="startGame" class="center">Play
+      game</button>
+    <button v-else-if="gamestate == gameStateOptions.PLAYING" @click="endGame" class="center">End
+      game</button>
+    <button v-else="gamestate == gameStateOptions.GAME_OVER" @click="startGame" class="center">Play
+      Again?</button>
+  </div>
 
 
   <div id="game-btns-container">
     <button v-for="choice in choiceOptions" @click="setPlayerChoice(choice)">{{ choice }}</button>
   </div>
 
-  <p class="score">Your Score: {{ playerScore }}</p>
-  <p class="score">Computer Score: {{ computerScore }}</p>
+  <div class="score-container">
+    <div id="player-score">
+      <p class="score-text">Your Score</p>
+      <h1 class="score">{{ playerScore }}</h1>
+    </div>
+
+    <div id="computer-score">
+      <p class="score-text">Computer Score</p>
+      <h1 class="score">{{ computerScore }}</h1>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -65,7 +104,7 @@ export default {
   /* margin-top: 0%; maybe change this from 20 - 0& after the game starts??? */
 }
 
-#start-game {
+.in-game-buttons-container>button {
   margin-top: 1em;
 }
 
@@ -76,9 +115,14 @@ export default {
   justify-content: space-around;
 }
 
-.score {
+.score-text {
   color: white;
   font-size: 2em;
+}
+
+.score {
+  color: white;
+  font-size: 4em;
 }
 
 button {
@@ -100,5 +144,36 @@ button:hover {
   border: 2px solid #12a2d0;
   transition: 0.2s;
   color: white;
+}
+
+button:disabled {
+  opacity: .2;
+  cursor: not-allowed;
+}
+
+.score-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+
+#player-score,
+#computer-score {
+  border: 2px solid white;
+  border-radius: 2em;
+  margin: 2em;
+  margin-top: 4em;
+  padding: 1em;
+  padding-bottom: 0;
+  width: 10em;
+}
+
+.score-container .score-text {
+  margin-bottom: 0px;
+}
+
+.score-container .score {
+  margin-top: 0px;
 }
 </style>
