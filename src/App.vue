@@ -6,17 +6,35 @@ export default {
       computerScore: 0,
       choiceOptions: ['rock', 'paper', 'scissors', 'lizard', 'spock'],
       playerChoice: '',
-      computerChoice: ''
+      computerChoice: '',
+      winningConditions: {
+        rock: ['scissors', 'lizard'],
+        paper: ['rock', 'spock'],
+        scissors: ['paper', 'lizard'],
+        lizard: ['paper', 'spock'],
+        spock: ['rock', 'scissors']
+      },
+      gameInfo: ''
     }
   },
   methods: {
     setPlayerChoice: function (selection) {
       this.playerChoice = selection;
       this.generateComputerChoice();
+      this.checkWinner();
     },
     generateComputerChoice: function () {
       let computerIndex = Math.floor(Math.random() * this.choiceOptions.length);
       this.computerChoice = this.choiceOptions[computerIndex];
+    },
+    checkWinner: function () {
+      if (this.playerChoice === this.computerChoice) {
+        this.gameInfo = "It's a tie!"
+      } else if (this.winningConditions[this.playerChoice].includes(this.computerChoice)) {
+        this.playerScore++;
+      } else {
+        this.computerScore++;
+      }
     }
   }
 }
@@ -32,8 +50,8 @@ export default {
     <button v-for="choice in choiceOptions" @click="setPlayerChoice(choice)">{{ choice }}</button>
   </div>
 
-  <p class="score">Your Score: {{ playerChoice }}</p>
-  <p class="score">Computer Score: {{ computerChoice }}</p>
+  <p class="score">Your Score: {{ playerScore }}</p>
+  <p class="score">Computer Score: {{ computerScore }}</p>
 </template>
 
 <style scoped>
