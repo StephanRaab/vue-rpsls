@@ -137,12 +137,12 @@ export default {
 
 .score-text {
   color: white;
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 .score {
   color: white;
-  font-size: 4em;
+  font-size: 4rem;
 }
 
 button {
@@ -152,7 +152,7 @@ button {
   background-color: #5fc5ba;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1rem;
   letter-spacing: .2em;
   cursor: pointer;
   transition: all ease-in-out .2s;
