@@ -146,6 +146,7 @@ export default {
 }
 
 button {
+  font: inherit;
   padding: 1.2em;
   border-radius: 1em;
   border: 2px solid transparent;
