@@ -20,7 +20,9 @@ export default {
         START: 'start',
         PLAYING: 'playing',
         GAME_OVER: 'game over'
-      }
+      },
+      showPlayerScore: true,
+      showComputerScore: true,
     }
   },
   methods: {
@@ -53,9 +55,17 @@ export default {
       if (this.playerChoice === this.computerChoice) {
         this.gameInfo = "It's a tie!"
       } else if (this.winningConditions[this.playerChoice].includes(this.computerChoice)) {
+        this.showPlayerScore = false;
         this.playerScore++;
+        setTimeout(() => {
+          this.showPlayerScore = true; // Show the text again
+        }, 500); // Match this duration with your CSS transition duration
       } else {
+        this.showComputerScore = false;
         this.computerScore++;
+        setTimeout(() => {
+          this.showComputerScore = true; // Show the text again
+        }, 500);
       }
     }
   }
@@ -84,12 +94,16 @@ export default {
   <div class="score-container">
     <div id="player-score">
       <p class="score-text">Your Score</p>
-      <h1 class="score">{{ playerScore }}</h1>
+      <Transition name="fade-slide">
+        <h1 v-if="showPlayerScore" class="score">{{ playerScore }}</h1>
+      </Transition>
     </div>
 
     <div id="computer-score">
       <p class="score-text">Computer Score</p>
-      <h1 class="score">{{ computerScore }}</h1>
+      <Transition name="fade-slide">
+        <h1 v-if="showComputerScore" class="score">{{ computerScore }}</h1>
+      </Transition>
     </div>
   </div>
 </template>
@@ -180,5 +194,16 @@ button:disabled {
 
 .score-container .score {
   margin-top: 0px;
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-slide-enter,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>
