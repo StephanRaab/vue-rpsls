@@ -141,14 +141,14 @@ button {
   font-size: 1em;
   letter-spacing: .2em;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all ease-in-out .2s;
 }
 
 button:hover {
   background-color: #17133b;
   border: 2px solid #12a2d0;
-  transition: 0.2s;
   color: white;
+  transform: translateY(-5px);
 }
 
 button:disabled {
