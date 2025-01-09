@@ -109,6 +109,11 @@ export default {
 </template>
 
 <style scoped>
+:root {
+  --clr-dark: #17133b;
+  --clr-primary: #5fc5ba;
+}
+
 .center {
   display: block;
   margin: auto;
@@ -150,7 +155,7 @@ button {
   padding: 1.2em;
   border-radius: 1em;
   border: 2px solid transparent;
-  background-color: #5fc5ba;
+  background-color: ;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1rem;
@@ -160,8 +165,8 @@ button {
 }
 
 button:hover {
-  background-color: #17133b;
-  border: 2px solid #12a2d0;
+  background-color: var(--clr-dark);
+  border: 2px solid var(--clr-primary);
   color: white;
   transform: translateY(-5px);
 }
