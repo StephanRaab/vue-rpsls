@@ -1,3 +1,38 @@
+<template>
+  <img class="logo center" src="/src/assets/rpsls.webp" alt="rock paper scissors lizard spock image">
+
+  <div id="logic-buttons-container">
+    <button v-if="gameState == gameStateOptions.START" aria-label="play game" @click="startGame" class="center">Play
+      game</button>
+    <button v-else-if="gameState == gameStateOptions.PLAYING" aria-label="end game" @click="endGame" class="center">End
+      game</button>
+    <button v-else="gameState == gameStateOptions.GAME_OVER" aria-label="play again" @click="startGame"
+      class="center">Play
+      Again?</button>
+  </div>
+
+  <div v-if="gameState == gameStateOptions.PLAYING" id="game-buttons-container">
+    <button v-for="choice in choiceOptions" aria-label="{{choice}} button" @click="setPlayerChoice(choice)">{{ choice
+      }}</button>
+  </div>
+
+  <div class="score-container">
+    <div id="player-score">
+      <p class="score-text">Your Score</p>
+      <Transition name="fade-slide">
+        <h1 v-if="showPlayerScore" class="score">{{ playerScore }}</h1>
+      </Transition>
+    </div>
+
+    <div id="computer-score">
+      <p class="score-text">Computer Score</p>
+      <Transition name="fade-slide">
+        <h1 v-if="showComputerScore" class="score">{{ computerScore }}</h1>
+      </Transition>
+    </div>
+  </div>
+</template>
+
 <script>
 export default {
   data() {
@@ -71,42 +106,6 @@ export default {
   }
 }
 </script>
-
-<template>
-  <img class="logo center" src="/src/assets/rpsls.webp" alt="rock paper scissors lizard spock image">
-
-  <div id="logic-buttons-container">
-    <button v-if="gameState == gameStateOptions.START" aria-label="play game" @click="startGame" class="center">Play
-      game</button>
-    <button v-else-if="gameState == gameStateOptions.PLAYING" aria-label="end game" @click="endGame" class="center">End
-      game</button>
-    <button v-else="gameState == gameStateOptions.GAME_OVER" aria-label="play again" @click="startGame"
-      class="center">Play
-      Again?</button>
-  </div>
-
-
-  <div v-if="gameState == gameStateOptions.PLAYING" id="game-buttons-container">
-    <button v-for="choice in choiceOptions" aria-label="{{choice}} button" @click="setPlayerChoice(choice)">{{ choice
-      }}</button>
-  </div>
-
-  <div class="score-container">
-    <div id="player-score">
-      <p class="score-text">Your Score</p>
-      <Transition name="fade-slide">
-        <h1 v-if="showPlayerScore" class="score">{{ playerScore }}</h1>
-      </Transition>
-    </div>
-
-    <div id="computer-score">
-      <p class="score-text">Computer Score</p>
-      <Transition name="fade-slide">
-        <h1 v-if="showComputerScore" class="score">{{ computerScore }}</h1>
-      </Transition>
-    </div>
-  </div>
-</template>
 
 <style scoped>
 :root {
